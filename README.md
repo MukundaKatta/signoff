@@ -1,22 +1,47 @@
 # Signoff
 
-> Read contracts like a lawyer.
+Read contracts like a lawyer. Paste a contract. Get the red flags, the boilerplate, and the terms worth negotiating. In plain English.
 
-Paste a contract. Get the red flags, the boilerplate, and the terms worth negotiating. In plain English.
+**Status:** v0 skeleton — landing page + keyword-based contract scanner. Full AI not yet wired.
 
-## What you get
+**Landing:** https://signoff.vercel.app
 
-- **Flags the traps** — Auto-renewals, non-competes, indemnity overreach. We mark every clause that should worry you.
-- **Suggests counter-language** — Not just what's wrong — what to ask for instead. Copy-paste ready.
-- **Private to you** — Your contracts never train a model. Zero retention option available.
+---
 
-## Category
+## Stack
 
-Prosumer legal. Part of a 50-product exploration of high-demand consumer and SMB markets.
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 15 (App Router) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind v4 |
+| Fonts | Inter via `next/font/google` |
+| Hosting | Vercel (zero config) |
+| Waitlist | https://waitlist-api-sigma.vercel.app |
 
-## Status
+## Run locally
 
-Landing page live with interactive demo and functional waitlist.
+```bash
+pnpm install
+pnpm dev
+```
 
-- **Live:** https://mukundakatta.github.io/signoff/
-- **Waitlist API:** https://waitlist-api-sigma.vercel.app/api/waitlist
+Open http://localhost:3000.
+
+## Deploy
+
+Push to `main` — Vercel picks it up automatically. No environment variables required.
+
+## Routes
+
+| Route | Description |
+|---|---|
+| `/` | Landing page (original copy + design preserved) |
+| `/try` | v0 contract scanner — paste text, get mocked red flags (unlimited liability, auto-renew, IP transfer) |
+| `/api/waitlist` | `POST { email }` → forwards to waitlist-api-sigma with `product: "signoff"` |
+
+## What's next
+
+- Wire real AI (clause extraction + risk scoring) behind `/try`
+- PDF / DOCX upload support
+- Auth + per-user contract history
